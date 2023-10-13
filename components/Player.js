@@ -2,6 +2,7 @@ import { currentTrackIdState, isPlayingState } from "@/atoms/songAtom";
 
 import useSongInfo from "@/hooks/useSongInfo";
 import useSpotify from "@/hooks/useSpotify";
+import { debounce } from "@/lib/debounce";
 import {
   ArrowsRightLeftIcon,
   SpeakerWaveIcon as VolumeDownIcon,
@@ -15,7 +16,7 @@ import {
   SpeakerWaveIcon as VolumeUpIcon,
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Player = () => {
@@ -61,6 +62,17 @@ const Player = () => {
       }
     });
   };
+
+  const debounceAdjustVolume = useCallback(
+    debounce((volume) => spotifyApi.setVolume(volume).catch((err) => {}), 500),
+    []
+  );
+
+  useEffect(() => {
+    if (volume > 0 && volume < 100) {
+      debounceAdjustVolume(volume);
+    }
+  }, [volume]);
 
   return (
     <div

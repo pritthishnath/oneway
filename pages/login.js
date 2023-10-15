@@ -13,7 +13,7 @@ const Login = ({ providers }) => {
       {Object.values(providers).map((provider) => {
         console.log("Provider", provider);
         return (
-          <div key={provider.id}>
+          <div key={provider.id} className="flex flex-col">
             <button
               className="bg-[#18D860] text-white p-5 rounded-lg text-lg"
               onClick={() =>
@@ -24,6 +24,9 @@ const Login = ({ providers }) => {
             >
               Login with {provider.name}
             </button>
+            <p className="text-gray-300 text-xs mt-4">
+              (For playing PREMIUM is required)
+            </p>
           </div>
         );
       })}

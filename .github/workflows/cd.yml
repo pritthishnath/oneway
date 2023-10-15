@@ -24,9 +24,6 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu/oneway.pnath.in
-            git stash
-            git pull origin main
-            git status
-            # npm install --only=prod
+            git stash && git pull origin main
             npm run build
             pm2 restart oneway.sh

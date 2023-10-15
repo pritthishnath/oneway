@@ -61,8 +61,13 @@ const Center = ({}) => {
               alt="profile picture"
             />
           )) || <UserCircleIcon className="w-10 h-10" />}
-          <h2>{session?.user.name}</h2>
-          <ChevronDownIcon className="w-5 h-5" />
+          <div className="flex flex-col space-y-0 justify-center">
+            <p style={{ marginBottom: -5 }} className="">
+              {session?.user.name}
+            </p>
+            <p className=" text-xs text-gray-700">Logout</p>
+          </div>
+          {/* <ChevronDownIcon className="w-5 h-5" /> */}
         </div>
       </header>
 

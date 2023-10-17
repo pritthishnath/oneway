@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.14.0"
+        # Reducing server load from running npm tasks
       - name: Install npm dependencies
         run: npm install
       - name: Create production build
@@ -33,7 +34,7 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.DIR_PATH }}
           # EXCLUDE: "/dist/, /node_modules/"
-      - name: Start the server
+      - name: Restart the service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
